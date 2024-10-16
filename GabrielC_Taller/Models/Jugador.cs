@@ -8,15 +8,15 @@ namespace GabrielC_Taller.Models
         [Key]
         public int ID { get; set; }
 
-        [Required] // Añadido para asegurar que el Nombre no sea nulo
-        [StringLength(100)] // Limitar la longitud del nombre
+        [Required] 
+        [StringLength(100)] 
         public string Nombre { get; set; } = null!;
 
-        [Required] // Añadido para asegurar que la Posicion no sea nula
-        [StringLength(50)] // Limitar la longitud de la posición
+        [Required] 
+        [StringLength(50)] 
         public string Posicion { get; set; } = null!;
 
-        [Range(0, 100)] // Validación para la edad
+        [Range(0, 100)]
         public int Edad { get; set; }
 
         [ForeignKey("Equipo")]

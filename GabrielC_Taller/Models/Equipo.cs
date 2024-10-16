@@ -8,14 +8,14 @@ namespace GabrielC_Taller.Models
         [Key]
         public int Id { get; set; }
 
-        [Required] // Aseguramos que el Nombre no sea nulo
-        [MaxLength(100)] // Limitar la longitud del nombre
+        [Required] 
+        [MaxLength(100)] 
         public string Nombre { get; set; } = null!;
 
-        [MaxLength(100)] // Limitar la longitud de la ciudad
+        [MaxLength(100)] 
         public string Ciudad { get; set; } = null!;
 
-        [Range(0, int.MaxValue)] // Validación para el número de títulos
+        [Range(0, int.MaxValue)] 
         public int Titulos { get; set; }
 
         public bool Extranjeros { get; set; }

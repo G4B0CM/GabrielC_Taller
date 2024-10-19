@@ -48,7 +48,7 @@ namespace GabrielC_Taller.Controllers
         // GET: Jugador/Create
         public IActionResult Create()
         {
-            ViewData["IDEquipo"] = new SelectList(_context.Equipo, "Id", "Id");
+            ViewData["IDEquipo"] = new SelectList(_context.Equipo, "Id", "Nombre");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace GabrielC_Taller.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IDEquipo"] = new SelectList(_context.Equipo, "Id", "Id", jugador.IDEquipo);
+            ViewData["IDEquipo"] = new SelectList(_context.Equipo, "Id", "Nombre", jugador.IDEquipo);
             return View(jugador);
         }
 

@@ -23,6 +23,6 @@ namespace GabrielC_Taller.Models
         [ForeignKey("Estadio")]
         public int IDEstadio { get; set; }
 
-        public virtual Estadio Estadio { get; set; } = null!;
+        public virtual Estadio? Estadio { get; set; } = null!;
     }
 }

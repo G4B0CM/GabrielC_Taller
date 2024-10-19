@@ -22,6 +22,6 @@ namespace GabrielC_Taller.Models
         [ForeignKey("Equipo")]
         public int IDEquipo { get; set; }
 
-        public virtual Equipo Equipo { get; set; } = null!;
+        public virtual Equipo? Equipo { get; set; } = null!;
     }
 }

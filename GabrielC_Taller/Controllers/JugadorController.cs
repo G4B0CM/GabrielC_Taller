@@ -20,19 +20,10 @@ namespace GabrielC_Taller.Controllers
         }
 
         // GET: Jugador
-        public async Task<IActionResult> Index(int? EquipoId)
+        public async Task<IActionResult> Index()
         {
-            ViewBag.IDEquipo = new SelectList(await _context.Equipo.ToListAsync(), "Id", "Nombre");
-            var jugadores = _context.Jugador.ToListAsync();
-            if(EquipoId != 0)
-            {
-                var jugadoresDeUnEquipo = _context.Jugador.Where(j => j.IDEquipo.Equals(EquipoId));
-                return View(await jugadoresDeUnEquipo.ToListAsync());
-            }
-            else
-                return View(await jugadores);
-
-
+            var gabrielC_TallerContext = _context.Jugador.Include(j => j.Equipo);
+            return View(await gabrielC_TallerContext.ToListAsync());
         }
 
         // GET: Jugador/Details/5
@@ -57,12 +48,13 @@ namespace GabrielC_Taller.Controllers
         // GET: Jugador/Create
         public IActionResult Create()
         {
-            // Obtener la lista de equipos para el dropdown
             ViewData["IDEquipo"] = new SelectList(_context.Equipo, "Id", "Nombre");
             return View();
         }
 
         // POST: Jugador/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Nombre,Posicion,Edad,IDEquipo")] Jugador jugador)
@@ -73,7 +65,6 @@ namespace GabrielC_Taller.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            // Reobtenemos la lista de equipos si hay errores
             ViewData["IDEquipo"] = new SelectList(_context.Equipo, "Id", "Nombre", jugador.IDEquipo);
             return View(jugador);
         }
@@ -91,12 +82,13 @@ namespace GabrielC_Taller.Controllers
             {
                 return NotFound();
             }
-            // Obtener la lista de equipos para el dropdown
-            ViewData["IDEquipo"] = new SelectList(_context.Equipo, "Id", "Nombre", jugador.IDEquipo);
+            ViewData["IDEquipo"] = new SelectList(_context.Equipo, "Id", "Id", jugador.IDEquipo);
             return View(jugador);
         }
 
         // POST: Jugador/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Nombre,Posicion,Edad,IDEquipo")] Jugador jugador)
@@ -126,8 +118,7 @@ namespace GabrielC_Taller.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            // Reobtenemos la lista de equipos si hay errores
-            ViewData["IDEquipo"] = new SelectList(_context.Equipo, "Id", "Nombre", jugador.IDEquipo);
+            ViewData["IDEquipo"] = new SelectList(_context.Equipo, "Id", "Id", jugador.IDEquipo);
             return View(jugador);
         }
 
